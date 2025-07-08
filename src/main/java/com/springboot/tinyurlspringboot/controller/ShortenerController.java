@@ -1,0 +1,45 @@
+package com.springboot.tinyurlspringboot.controller;
+
+import com.springboot.tinyurlspringboot.SHA256Encoder;
+import com.springboot.tinyurlspringboot.URLValidator;
+import com.springboot.tinyurlspringboot.model.shortener.Shortener;
+import com.springboot.tinyurlspringboot.model.user.User;
+import com.springboot.tinyurlspringboot.repositories.ShortenerRepository;
+import com.springboot.tinyurlspringboot.repositories.UserRepository;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
+
+@RestController
+public class ShortenerController {
+    private final ShortenerRepository shortenerRepository;
+    private final UserRepository userRepository;
+
+    public ShortenerController(ShortenerRepository shortenerRepository, UserRepository userRepository) {
+        this.shortenerRepository = shortenerRepository;
+        this.userRepository = userRepository;
+    }
+    @PostMapping("/shorten")
+    public ResponseEntity<String> shortener(@RequestBody Map<String,String> map) {
+        String email = map.get("email");
+        String original=map.get("original");
+        User user=userRepository.findByEmail(email);
+        Shortener existing = shortenerRepository.findByOriginal(original);
+        if (user==null){
+            return ResponseEntity.status(404).body("User not found");
+        }
+        if (!URLValidator.isValidURL(original)){
+            return ResponseEntity.badRequest().body("Invalid URL");
+        }
+        if (existing==null) {
+            String shortURL=SHA256Encoder.getShortURL(original);
+            shortenerRepository.save(new Shortener(original,shortURL,user));
+            return ResponseEntity.ok(shortURL);
+        }
+        return ResponseEntity.ok(existing.getShort_url());
+    }
+
+}
