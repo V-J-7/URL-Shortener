@@ -26,6 +26,8 @@ public class ShortenerController {
     public ResponseEntity<String> shortener(@RequestBody Map<String,String> map) {
         String email = map.get("email");
         String original=map.get("original");
+        original=URLValidator.normalize(original);
+        String urlName=map.get("urlName");
         User user=userRepository.findByEmail(email);
         Shortener existing = shortenerRepository.findByOriginal(original);
         if (user==null){
@@ -36,7 +38,7 @@ public class ShortenerController {
         }
         if (existing==null) {
             String shortURL=SHA256Encoder.getShortURL(original);
-            shortenerRepository.save(new Shortener(original,shortURL,user));
+            shortenerRepository.save(new Shortener(original,shortURL,urlName,user));
             return ResponseEntity.ok(shortURL);
         }
         return ResponseEntity.ok(existing.getShort_url());

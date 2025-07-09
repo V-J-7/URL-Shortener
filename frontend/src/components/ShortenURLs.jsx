@@ -5,6 +5,7 @@ function ShortenURLs({ onShorten }) {
     const { email } = useContext(EmailContext);
     const [original, setOriginal] = useState('');
     const [shortURL, setShortURL] = useState('');
+    const[urlName,setUrlName]=useState('');
 
     async function sendURL(e) {
         e.preventDefault();
@@ -13,7 +14,7 @@ function ShortenURLs({ onShorten }) {
             headers: {
                 "Content-type": "application/json"
             },
-            body: JSON.stringify({ email, original })
+            body: JSON.stringify({ email, original ,urlName})
         });
         setShortURL(await res.text());
         if (onShorten) {
@@ -35,9 +36,19 @@ function ShortenURLs({ onShorten }) {
                     onChange={(e) => setOriginal(e.target.value)}
                     required
                 />
+                <br/><br/>
+                <label htmlFor="url-name">Url Name:</label>
+                <input
+                    id="url-name"
+                    className="input-field"
+                    type="text"
+                    placeholder="Enter URL Name"
+                    value={urlName}
+                    onChange={(e) => setUrlName(e.target.value)}
+                />
             </div>
 
-            {shortURL==="Invalid URL" ? <p className="invalid-url">{shortURL}</p>:(
+            {shortURL === "Invalid URL" ? <p className="invalid-url">{shortURL}</p> : (
                 <div className="form-group">
                     <label htmlFor="short-url">Short URL:</label>
                     <a href={original}>{shortURL}</a>

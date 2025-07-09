@@ -38,11 +38,14 @@ function Dashboard(){
     return(
         <>
             <User/>
+            <h1>Shorten a URL</h1>
+            <ShortenURLs onShorten={fetchData}/>
             <h1>Shortened URLs</h1>
             {shorteners.length>0?(
                 <table className="url-table">
                     <thead>
                     <tr>
+                        <th>URL Name</th>
                         <th>Original URL</th>
                         <th>Short URL</th>
                     </tr>
@@ -50,6 +53,7 @@ function Dashboard(){
                    <tbody>
                     {shorteners.map((s,index)=>(
                        <tr key={index}>
+                           <td>{s.urlName}</td>
                            <td><a href={s.originalURL}>{s.originalURL}</a></td>
                            <td><a href={s.originalURL}>{s.shortURL}</a></td>
                        </tr>
@@ -58,7 +62,6 @@ function Dashboard(){
                 </table>
             ):
             <p>{dashboardMessage}</p>}
-            <ShortenURLs onShorten={fetchData}/>
         </>
     )
 }

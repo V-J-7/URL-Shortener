@@ -10,6 +10,9 @@ public class Shortener {
     @Column(name="original",nullable = false,unique = true,columnDefinition = "TEXT")
     private String original;
 
+    @Column(name="url_type")
+    private String urlName;
+
     @Id
     @Column(name="short",nullable = false,unique = true)
     private String short_url;
@@ -18,10 +21,11 @@ public class Shortener {
     @JoinColumn(name="user_id",nullable = false)
     private User user;
 
-    public Shortener(String original, String short_url, User user) {
+    public Shortener(String original, String short_url, String urlName,User user) {
         this.original = original;
         this.short_url = short_url;
         this.user = user;
+        this.urlName = urlName;
     }
     public Shortener() {
 
@@ -42,4 +46,5 @@ public class Shortener {
     public String getShort_url() {
         return short_url;
     }
+    public String getUrlName() {return urlName;}
 }
