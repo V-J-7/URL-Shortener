@@ -1,4 +1,4 @@
-package com.springboot.tinyurlspringboot;
+package com.springboot.tinyurlspringboot.utils;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -26,6 +26,6 @@ public class SHA256Encoder {
             ans.append(BASE.charAt((int)(shortenedSHA%62)));
             shortenedSHA=shortenedSHA/62;
         }
-        return ans.reverse().toString();
+        return "mini.to/"+ans.reverse();
     }
 }

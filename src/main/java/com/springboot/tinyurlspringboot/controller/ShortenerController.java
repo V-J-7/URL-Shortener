@@ -1,6 +1,6 @@
 package com.springboot.tinyurlspringboot.controller;
 
-import com.springboot.tinyurlspringboot.SHA256Encoder;
+import com.springboot.tinyurlspringboot.utils.SHA256Encoder;
 import com.springboot.tinyurlspringboot.URLValidator;
 import com.springboot.tinyurlspringboot.model.shortener.Shortener;
 import com.springboot.tinyurlspringboot.model.user.User;
@@ -27,6 +27,7 @@ public class ShortenerController {
         String email = map.get("email");
         String original=map.get("original");
         original=URLValidator.normalize(original);
+        String shortURL="";
         String urlName=map.get("urlName");
         User user=userRepository.findByEmail(email);
         Shortener existing = shortenerRepository.findByOriginal(original);
@@ -37,11 +38,20 @@ public class ShortenerController {
             return ResponseEntity.badRequest().body("Invalid URL");
         }
         if (existing==null) {
-            String shortURL=SHA256Encoder.getShortURL(original);
+            shortURL=SHA256Encoder.getShortURL(original);
             shortenerRepository.save(new Shortener(original,shortURL,urlName,user));
             return ResponseEntity.ok(shortURL);
         }
-        return ResponseEntity.ok(existing.getShort_url());
+        shortURL=existing.getShortUrl();
+        shortenerRepository.save(new Shortener(original,shortURL,urlName,user));
+        return ResponseEntity.ok(existing.getShortUrl());
     }
-
+    @PostMapping("/delete")
+    public void delete(@RequestBody Map<String,String> map) {
+        String email=map.get("email");
+        String shortURL=map.get("shortURL");
+        User user=userRepository.findByEmail(email);
+        Shortener shortener=shortenerRepository.findByShortUrlAndUser(shortURL,user);
+        shortenerRepository.delete(shortener);
+    }
 }

@@ -63,7 +63,9 @@ h1 {
     color: white;
     font-weight: 600;
 }
-
+.delete-btn{
+    background-color: #af0808;
+}
 
 /* ======================
    Empty Message
@@ -101,7 +103,6 @@ p {
 /* ======================
    Input
 ====================== */
-
 .input-field {
     width: 80%;
     padding: 16px 18px;
@@ -132,12 +133,12 @@ p {
     color:#fff;
 }
 .shorten-btn {
-    width: 100%;
+    width: 90%;
     padding: 12px;
     background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 10px;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
@@ -147,6 +148,53 @@ p {
 .shorten-btn:hover {
     background-color: #0056b3;
 }
+
+/*QR Code*/
+.qr-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    animation: fadeIn 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.qr-popup {
+    text-align: center;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    animation: scaleIn 0.3s ease;
+}
+
+.qr-text {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #333;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
 /*USER*/
 .user-info {
     position: absolute;

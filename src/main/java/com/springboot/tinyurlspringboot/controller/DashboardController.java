@@ -6,7 +6,6 @@ import com.springboot.tinyurlspringboot.model.user.User;
 import com.springboot.tinyurlspringboot.repositories.ShortenerRepository;
 import com.springboot.tinyurlspringboot.repositories.UserRepository;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +28,7 @@ public class DashboardController {
         String email=map.get("email");
         User user=userRepository.findByEmail(email);
         List<Shortener> list=shortenerRepository.findAllByUser(user);
-        List<ShortenerDTO> shorts=list.stream().map(s->new ShortenerDTO(s.getOriginal(),s.getShort_url(),s.getUrlName())).toList();
+        List<ShortenerDTO> shorts=list.stream().map(s->new ShortenerDTO(s.getOriginal(),s.getShortUrl(),s.getUrlName())).toList();
         if (list.isEmpty())return ResponseEntity.noContent().build();
         return ResponseEntity.ok(shorts);
     }

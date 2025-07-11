@@ -52,6 +52,8 @@ const SignupForm=()=>{
         });
         const message=await res.text()
         setSignupMessage(message);
+        setPassword('')
+        setEmail('')
     }
     return(
         <>
@@ -60,7 +62,7 @@ const SignupForm=()=>{
                 <label>
                     Email:<input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Enter your email"></input>
                 </label>
-                 <p className="error">{emailMessage}</p>
+                <p className="error">{emailMessage}</p>
                 <label>
                     Password:<input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Enter your password" autoComplete="new-password"></input>
                 </label>

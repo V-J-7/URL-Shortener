@@ -21,6 +21,7 @@ function ShortenURLs({ onShorten }) {
             onShorten();
         }
         setOriginal("");
+        setUrlName('')
     }
 
     return (
@@ -45,7 +46,7 @@ function ShortenURLs({ onShorten }) {
                     placeholder="Enter URL Name"
                     value={urlName}
                     onChange={(e) => setUrlName(e.target.value)}
-                />
+                /><br/><br/>
             </div>
 
             {shortURL === "Invalid URL" ? <p className="invalid-url">{shortURL}</p> : (
@@ -54,8 +55,7 @@ function ShortenURLs({ onShorten }) {
                     <a href={original}>{shortURL}</a>
                 </div>
             )}
-
-            <button type="submit" className="shorten-btn">Shorten</button>
+            <button type="submit" className="shorten-btn">Shorten</button><br/><br/>
         </form>
     );
 }

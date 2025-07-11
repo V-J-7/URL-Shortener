@@ -67,3 +67,8 @@
     color: #007bff;
     font-weight: bold;
 }
+
+.status-msg{
+    color:red;
+    font-size:2em;
+}
