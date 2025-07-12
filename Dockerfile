@@ -1,23 +1,28 @@
-# Use Java 23 (yes, it's available via Eclipse Temurin)
-FROM eclipse-temurin:23-jdk as builder
+# ===== Stage 1: Build the app using Java 23 =====
+FROM eclipse-temurin:23-jdk AS builder
 
+# Set working directory inside container
 WORKDIR /app
 
-# Copy everything to container
-COPY . .
+# Copy essential files for Maven build
+COPY pom.xml .
+COPY mvnw .
+COPY mvnw.cmd .
+COPY .mvn/ .mvn
+COPY src/ src/
 
-# Build the application
+# Build the Spring Boot app (skip tests to speed things up)
 RUN ./mvnw clean package -DskipTests
 
-# Run phase
+# ===== Stage 2: Run the app =====
 FROM eclipse-temurin:23-jdk
 
 WORKDIR /app
 
-# Copy built jar from builder image
+# Copy the JAR file built in the previous stage
 COPY --from=builder /app/target/*.jar app.jar
 
-# Expose the default port
+# Expose the port (make sure Spring Boot is listening on this)
 EXPOSE 8080
 
 # Run the app
