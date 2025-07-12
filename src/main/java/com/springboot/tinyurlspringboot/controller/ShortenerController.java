@@ -30,7 +30,7 @@ public class ShortenerController {
         String shortURL="";
         String urlName=map.get("urlName");
         User user=userRepository.findByEmail(email);
-        Shortener existing = shortenerRepository.findByOriginal(original);
+        Shortener existing = shortenerRepository.findByOriginalAndUser(original,user);
         if (user==null){
             return ResponseEntity.status(404).body("User not found");
         }
@@ -42,8 +42,6 @@ public class ShortenerController {
             shortenerRepository.save(new Shortener(original,shortURL,urlName,user));
             return ResponseEntity.ok(shortURL);
         }
-        shortURL=existing.getShortUrl();
-        shortenerRepository.save(new Shortener(original,shortURL,urlName,user));
         return ResponseEntity.ok(existing.getShortUrl());
     }
     @PostMapping("/delete")

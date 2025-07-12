@@ -213,3 +213,61 @@ p {
     font-weight: bold;
     color: #007bff;
 }
+/* ======================
+   Responsive Styling
+====================== */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 20px 10px;
+    }
+
+    .user-info {
+        top: 10px;
+        right: 10px;
+        font-size: 0.9rem;
+        padding: 6px 10px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        margin: 20px 0 10px;
+    }
+
+    .url-table {
+        width: 100%;
+        font-size: 0.85rem;
+        margin: 10px auto;
+    }
+
+    .url-table th,
+    .url-table td {
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+
+    .shorten-form {
+        width: 95%;
+        margin: 30px auto 0;
+        padding: 20px;
+    }
+
+    .input-field {
+        width: 100%;
+        font-size: 1rem;
+        padding: 14px 16px;
+    }
+
+    .shorten-btn {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    .qr-popup {
+        width: 90%;
+        padding: 1.5rem;
+    }
+
+    .qr-text {
+        font-size: 0.95rem;
+    }
+}
