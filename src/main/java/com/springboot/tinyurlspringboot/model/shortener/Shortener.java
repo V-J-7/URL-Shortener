@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import com.springboot.tinyurlspringboot.model.user.User;
 
 @Entity
-@Table(name="shortener",schema = "java_project")
+@Table(name="shortener")
 
 public class Shortener {
 

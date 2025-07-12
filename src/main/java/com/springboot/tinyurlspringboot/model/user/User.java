@@ -3,7 +3,7 @@ package com.springboot.tinyurlspringboot.model.user;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="users",schema="java_project")
+@Table(name="users")
 public class User {
     @Column(name="email",nullable=false)
     String email;
