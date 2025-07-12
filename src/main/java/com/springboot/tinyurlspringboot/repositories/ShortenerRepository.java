@@ -8,5 +8,5 @@ import java.util.List;
 public interface ShortenerRepository extends JpaRepository<Shortener,Long> {
     List<Shortener>findAllByUser(User user);
     Shortener findByOriginal(String originalUrl);
-    Shortener findByShortUrlAndUser(String short_url, User user);
+    Shortener findByShortUrlAndUser(String shortUrl, User user);
 }
