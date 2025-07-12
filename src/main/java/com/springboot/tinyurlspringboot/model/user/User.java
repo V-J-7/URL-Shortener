@@ -3,7 +3,7 @@ package com.springboot.tinyurlspringboot.model.user;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="users")
+@Table(name="users",schema="java_project")
 public class User {
     @Column(name="email",nullable=false)
     String email;
@@ -24,13 +24,13 @@ public class User {
     public User() {
 
     }
-    void setEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
-    void setPassword(String password) {
+    public void setPassword(String password) {
         this.passwordHash = password;
     }
-    void setUserId(int userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
     public String getPassword() {
