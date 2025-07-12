@@ -25,7 +25,7 @@ function Dashboard() {
     const [showQR,setShowQR]=useState(false);
     const {email} = useContext(EmailContext)
     const fetchData = async () => {
-        const res = await fetch("http://localhost:8080/dashboard", {
+        const res = await fetch("https://url-shortener-ce9u.onrender.com/dashboard", {
             method: "POST",
             headers: {
                 "Content-type": "application/json",
