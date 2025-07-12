@@ -41,7 +41,7 @@ function Dashboard() {
         }
     }
     const removeURL=async(shortURL,email)=>{
-        const res=await fetch("http://localhost:8080/delete",{
+        const res=await fetch("https://url-shortener-ce9u.onrender.com/delete",{
             method:"POST",
             headers:{
                 "Content-type":"application/json",

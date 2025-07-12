@@ -11,7 +11,7 @@ function LoginForm(){
     async function handleLogin(e){
         e.preventDefault()
         try{
-            const res=await fetch("http://localhost:8080/auth/login",{
+            const res=await fetch("https://url-shortener-ce9u.onrender.com/auth/login",{
                 method:"POST",
                 headers:{
                     "Content-type":"application/json"

@@ -9,7 +9,7 @@ function ShortenURLs({ onShorten }) {
 
     async function sendURL(e) {
         e.preventDefault();
-        const res = await fetch("http://localhost:8080/shorten", {
+        const res = await fetch("https://url-shortener-ce9u.onrender.com/shorten", {
             method: "POST",
             headers: {
                 "Content-type": "application/json"

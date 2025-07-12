@@ -43,7 +43,7 @@ const SignupForm=()=>{
         else{
             setPasswordMessage('');
         }
-        const res=await fetch("http://localhost:8080/auth/signup",{
+        const res=await fetch("https://url-shortener-ce9u.onrender.com/auth/signup",{
             method:"POST",
             headers:{
                 "Content-type":"application/json"
